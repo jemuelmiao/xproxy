@@ -1,0 +1,34 @@
+[[Envs]]
+	Name = "环境名称"
+	Disable = false
+	# 环境全局跳跃链，可以配置一个或多个，顺序决定跳跃顺序
+	[[Envs.Hops]]
+        Host = "{ip}:{port}"
+        User = "{user}"
+        Password = "{password}"
+        # 本地sock代理地址
+        Listen = "127.0.0.1:1080"
+	[[Envs.Hops]]
+        Host = "{ip}:{port}"
+        User = "{user}"
+        Password = "{password}"
+        # 本地sock代理地址
+        Listen = "127.0.0.1:1081"
+	[[Envs.Services]]
+        Name = "服务名"
+        Disable = false
+        # 本地浏览器访问地址
+        Listen = ":10000"
+        [[Envs.Services.Proxys]]
+            # 代理类型，http、sock5
+            Type = "sock5"
+            # 代理规则，标准正则表达式
+            Rule = "^/(dag)|(cgi).*"
+            # 服务所在局域网地址，例如本地前端热更新服务：127.0.0.1:8080，例如远程云环境内网服务：172.x.x.x:8090
+            Host = "{ip}:{port}"
+            # 是否使用环境hop
+            UseEnvHops = true
+        [[Envs.Services.Proxys]]
+            Type = "http"
+            Rule = ".*"
+            Host = "127.0.0.1:8080"
