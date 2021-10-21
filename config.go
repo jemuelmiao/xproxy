@@ -26,7 +26,7 @@ type Service struct {
 type Proxy struct {
 	Type 		string		`json:"type"` //代理类型：http、sock5
 	Rule		string		`json:"rule"` //代理规则
-	Host 		string		`json:"host"` //服务所在局域网地址，例如本地：127.0.0.1:8080，例如云环境：172.31.16.7:8090
+	Host 		string		`json:"host"` //服务所在局域网地址，例如本地：127.0.0.1:8080，例如云环境：172.xx.xx.xx:8090
 	Hops 		[]*Hop		`json:"hops"` //跳跃信息，仅sock5有效
 	UseEnvHops	bool		`json:"use_env_hops"` //是否使用环境hops，仅sock5有效
 }
