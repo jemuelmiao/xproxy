@@ -52,8 +52,12 @@ func getHandler(service *Service) func(http.ResponseWriter, *http.Request) {
 			transport.Dial = dialer.Dial
 			proxyReq.URL.Scheme = "http"
 			proxyReq.URL.Host = px.Host
-		} else {
-			fmt.Println("go local proxy:", r.URL.Path)
+		} else if px.Type == "https" {
+			fmt.Println("go https proxy:", r.URL.Path)
+			proxyReq.URL.Scheme = "https"
+			proxyReq.URL.Host = px.Host
+		} else if px.Type == "http" {
+			fmt.Println("go http proxy:", r.URL.Path)
 			proxyReq.URL.Scheme = "http"
 			proxyReq.URL.Host = px.Host
 		}

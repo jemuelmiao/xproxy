@@ -26,7 +26,7 @@ type Service struct {
 type Proxy struct {
 	Type 		string		`json:"type"` //代理类型：http、sock5
 	Rule		string		`json:"rule"` //代理规则
-	Host 		string		`json:"host"` //服务所在局域网地址，例如本地：127.0.0.1:8080，例如云环境：172.x.x.x:8090
+	Host 		string		`json:"host"` //服务所在局域网地址，例如本地：127.0.0.1:8080，例如云环境：172.31.16.7:8090
 	Hops 		[]*Hop		`json:"hops"` //跳跃信息，仅sock5有效
 	UseEnvHops	bool		`json:"use_env_hops"` //是否使用环境hops，仅sock5有效
 }
@@ -62,8 +62,8 @@ func init() {
 				continue
 			}
 			for _, px := range service.Proxys {
-				if px.Type != "http" && px.Type != "sock5" {
-					fmt.Println("代理类型必须为http或sock5：", px.Type)
+				if px.Type != "http" && px.Type != "https" && px.Type != "sock5" {
+					fmt.Println("代理类型必须为http、https、sock5：", px.Type)
 					os.Exit(1)
 				}
 				if px.Type == "sock5" && px.UseEnvHops {
